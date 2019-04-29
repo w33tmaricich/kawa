@@ -80,7 +80,14 @@
                      :window-y-pos :top}})
 
 (def FFPROBE {:cmd "ffprobe"
-              :flags {}})
+              :flags {
+                      :bitstream-filters :bsfs
+                      :force-format :f
+                      :input-url :i
+                      :license :L
+                      :output-format :of
+                      :pixel-formats :pix_fmts
+                      }})
 
 (defn fmt-cmd
   "Creates a vector that is ready to be passed to sh.
