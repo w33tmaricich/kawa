@@ -5,20 +5,18 @@ All notable changes to this project will be documented in this file. This change
 ### Changed
 - Add a new arity to `make-widget-async` to provide a different widget shape.
 
-## [0.1.1] - 2019-04-26
+## [0.1.0] - 2019-05-01
 ### Changed
-- Documentation on how to make the widgets.
+- Launch ffmpeg, ffplay, and ffprobe processes.
+- Verbose flag transformations.
+- Register running processes to an aggregate list.
+- Kill running processes mid execution.
 
 ### Removed
-- `make-widget-sync` - we're all async, all the time.
+N/A
 
 ### Fixed
-- Fixed widget maker to keep working when daylight savings switches over.
+N/A
 
-## 0.1.0 - 2019-04-26
-### Added
-- Files from the new template.
-- Widget maker public API - `make-widget-sync`.
-
-[Unreleased]: https://github.com/your-name/kawa/compare/0.1.1...HEAD
-[0.1.1]: https://github.com/your-name/kawa/compare/0.1.0...0.1.1
+[Unreleased]: https://github.com/w33tmaricich/kawa/compare/0.1.0...HEAD
+[0.1.1]: https://github.com/your-name/kawa/compare/develop...0.1.0

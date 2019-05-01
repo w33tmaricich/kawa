@@ -2,8 +2,7 @@
   (:require [me.raynes.conch.low-level :as sh]))
 
 (def FFMPEG {:cmd "ffmpeg"
-             :flags {
-                     :audio-frames :aframes
+             :flags {:audio-frames :aframes
                      :audio-sampling-frequency :ar
                      :audio-quality :aq
                      :audio-sync :async
@@ -60,8 +59,7 @@
                      :stop-on-error :xerror
                      :video-frames :vframes
                      :video-filtergraph :vf
-                     :video-sync :vsync
-                     }})
+                     :video-sync :vsync}})
 
 (def FFPLAY {:cmd "ffplay"
              :flags {:disable-audio :an
@@ -80,19 +78,17 @@
                      :window-y-pos :top}})
 
 (def FFPROBE {:cmd "ffprobe"
-              :flags {
-                      :bitstream-filters :bsfs
+              :flags {:bitstream-filters :bsfs
                       :force-format :f
                       :input-url :i
                       :license :L
                       :output-format :of
-                      :pixel-formats :pix_fmts
-                      }})
+                      :pixel-formats :pix_fmts}})
 
 (defn fmt-cmd
-  "Creates a vector that is ready to be passed to sh.
+  "Creates a vector that is ready to be passed to sh/proc.
   app: a map with a :cmd and :flags
-  argv: any number of arguments to be passed to sh
+  argv: any number of arguments to be passed to sh/proc
   
   1. All keywords in argv are converted to a app:flags keyword if one exists.
   2. All keywords are converted to - prefixed strings.
@@ -105,18 +101,24 @@
 
 (defn sh-apply!
   "Takes an application map and a list of arguments. Applies the formatted
-  application and arguments to sh."
+  application and arguments to sh/proc."
   [app & args]
   (let [formatted-arguments (apply fmt-cmd app args)
         process-info (apply sh/proc formatted-arguments)]
     {:cmd formatted-arguments
      :process process-info}))
 
-(defn ffmpeg! [& args]
+(defn ffmpeg!
+  "Launches a ffmpeg process using the given flags."
+  [& args]
   (apply sh-apply! FFMPEG args))
 
-(defn ffplay! [& args]
+(defn ffplay!
+  "Launches a ffplay process using the given flags."
+  [& args]
   (apply sh-apply! FFPLAY args))
 
-(defn ffprobe! [& args]
+(defn ffprobe!
+  "Launches a ffprobe process using the given flags."
+  [& args]
   (apply sh-apply! FFPROBE args))
