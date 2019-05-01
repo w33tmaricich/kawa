@@ -1,5 +1,5 @@
 (ns kawa.core
-  (:use [clojure.java.shell :only [sh]]))
+  (:require [me.raynes.conch.low-level :as sh]))
 
 (def FFMPEG {:cmd "ffmpeg"
              :flags {
@@ -107,11 +107,10 @@
   "Takes an application map and a list of arguments. Applies the formatted
   application and arguments to sh."
   [app & args]
-  (let [cmd! (apply sh (apply fmt-cmd app args))
-        {:keys [exit out err]} cmd!]
-    (when-not (zero? exit)
-      (throw (Exception. err)))
-    out))
+  (let [formatted-arguments (apply fmt-cmd app args)
+        process-info (apply sh/proc formatted-arguments)]
+    {:cmd formatted-arguments
+     :process process-info}))
 
 (defn ffmpeg! [& args]
   (apply sh-apply! FFMPEG args))

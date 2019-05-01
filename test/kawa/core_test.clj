@@ -1,5 +1,6 @@
 (ns kawa.core-test
   (:require [clojure.test :refer :all]
+            [me.raynes.conch.low-level :as sh]
             [kawa.core :refer :all]))
 
 ;(ffplay! :duration 11 "rtsp://admin:robot@172.28.137.102:554/media/video1")
@@ -51,6 +52,16 @@
            ["ffplay" "-an"]))
     (is (= (fmt-cmd FFMPEG :this "is" :very 2)
            ["ffmpeg" "-this" "is" "-very" "2"]))))
+
+(deftest ffmpeg
+  (testing "Generating a test stream"
+    (let [filename "testsrc.mp4"
+          wait 10]
+      (ffmpeg! :f "lavfi"
+               :i "testsrc"
+               :duration wait
+               :pix_fmt "yuv420p"
+               filename))))
 
 ;(deftest ffplay
   ;(testing "playing a video"
