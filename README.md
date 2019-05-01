@@ -39,7 +39,7 @@ kawa.core=> (require `[kawa.manager :as manager])
 ;nil
 ```
 
-`ffmpeg`, `ffplay`, and `ffprobe` will all launch an instance of each
+`ffmpeg!`, `ffplay!`, and `ffprobe!` will all launch an instance of each
 application. As a simple example, lets generate a test video and store it
 in a file on your system.
 ```clojure
@@ -48,7 +48,7 @@ kawa.core=> (ffmpeg! :f "lavfi" :i "testsrc" :t 10 :pix_fmt "yuv420p" "testsrc.m
 ```
 The command returns a map that contains `:cmd` which holds the exact command
 run. It also contains `:process` which holds the return value of
-(conch's sh/proc implementation)[https://github.com/Raynes/conch]. The `:process`
+[conch's sh/proc implementation](https://github.com/Raynes/conch). The `:process`
 value is used by the manager to kill running processes.
 
 As you can see, flags are represented by keywords. There are many quality of
