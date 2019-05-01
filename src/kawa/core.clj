@@ -2,8 +2,7 @@
   (:require [me.raynes.conch.low-level :as sh]))
 
 (def FFMPEG {:cmd "ffmpeg"
-             :flags {
-                     :audio-frames :aframes
+             :flags {:audio-frames :aframes
                      :audio-sampling-frequency :ar
                      :audio-quality :aq
                      :audio-sync :async
@@ -60,8 +59,7 @@
                      :stop-on-error :xerror
                      :video-frames :vframes
                      :video-filtergraph :vf
-                     :video-sync :vsync
-                     }})
+                     :video-sync :vsync}})
 
 (def FFPLAY {:cmd "ffplay"
              :flags {:disable-audio :an
