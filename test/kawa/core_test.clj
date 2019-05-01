@@ -18,20 +18,17 @@
            missmatched {}]
       (if (empty? newflags)
         missmatched
-        (if (contains? flags2 (first flag-map))
-          (if (= ((first flag-map) flags2)
-                 (second flag-map))
-            (recur (first newflags)
-                   (rest newflags)
-                   missmatched)
-            (recur (first newflags)
-                   (rest newflags)
-                   (assoc missmatched (first flag-map)
-                          [(second flag-map)
-                           ((first flag-map) flags2)])))
+        (if (or (nil? ((first flag-map) flags2))
+                (= ((first flag-map) flags2)
+                   (second flag-map)))
           (recur (first newflags)
                  (rest newflags)
-                 missmatched))))))
+                 missmatched)
+          (recur (first newflags)
+                 (rest newflags)
+                 (assoc missmatched (first flag-map)
+                        [(second flag-map)
+                         ((first flag-map) flags2)])))))))
 
 (deftest applications-defined
   (testing "Constants exist."
