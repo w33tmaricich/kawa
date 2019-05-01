@@ -1,7 +1,6 @@
 (ns kawa.manager-test
   (:require [clojure.test :refer :all]
-            [kawa.manager :refer :all]
-            [clojure.core.async :refer [chan]]))
+            [kawa.manager :refer :all]))
 
 (deftest manager-read-writes
   (testing "Reading from the manager."
