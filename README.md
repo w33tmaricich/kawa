@@ -17,7 +17,7 @@ This is a wrapper library. Make sure you have ffmpeg installed on your system
 and runnable through your system path.
 
 ```clojure
-[kawa "0.1.0"]
+[w33t/kawa "0.1.0"]
 ```
 
 ## Usage
@@ -66,6 +66,19 @@ kawa.core=> (manager/ls)
 ;{}
 ```
 
+The manager is using a namespaced `(atom {})` to store information registered.
+You may find yourself in a situation where you wish to have multiple registries.
+If this is the case, all 3 kawa.manager functions have an optional first
+parameter that takes an `atom`.
+```clojure
+kawa.core=> (def my-registry (atom {}))
+; #'kawa.core/my-registry
+kawa.core=> (manager/ls my-registry)
+;{}
+kawa.core=> (manager/ls)
+;{:cmd ["ffmpeg" "-f" "lavfi" "-i" "testsrc" "-t" "10" "-pix_fmt" "yuv460p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x33b2f029 "java.lang.UNIXProcess$ProcessPipeInputStream@33b2f029"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x134ec85c "java.lang.UNIXProcess$ProcessPipeOutputStream@134ec85c"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x375941a4 "java.lang.UNIXProcess$ProcessPipeInputStream@375941a4"], :process #object[java.lang.UNIXProcess 0x3c319941 "java.lang.UNIXProcess@3c319941"]}}
+```
+
 In this example, we have no processes registered yet. Lets spin up an ffmpeg
 process and register it in one go.
 
@@ -86,6 +99,7 @@ kawa.core=> (manager/kill :test)
 ```
 `kill` returns a future whos value is the exit value that is returned from the
 shell.
+
 
 ### Detailed Docs
 
