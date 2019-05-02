@@ -17,7 +17,7 @@ This is a wrapper library. Make sure you have ffmpeg installed on your system
 and runnable through your system path.
 
 ```clojure
-[w33t/kawa "0.1.0"]
+[w33t/kawa "0.1.1"]
 ```
 
 ## Usage
