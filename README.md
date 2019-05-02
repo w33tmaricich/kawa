@@ -16,9 +16,7 @@ about we write a robust system that can:
 This is a wrapper library. Make sure you have ffmpeg installed on your system
 and runnable through your system path.
 
-```clojure
-[w33t/kawa "0.1.1"]
-```
+[![Clojars Project](https://img.shields.io/clojars/v/w33t/kawa.svg)](https://clojars.org/w33t/kawa)
 
 ## Usage
 
