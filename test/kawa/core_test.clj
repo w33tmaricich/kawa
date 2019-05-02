@@ -33,24 +33,24 @@
 
 (deftest applications-defined
   (testing "Constants exist."
-    (is FFMPEG)
-    (is FFPLAY)
-    (is FFPROBE))
+    (is @#'kawa.core/ffmpeg)
+    (is @#'kawa.core/ffplay)
+    (is @#'kawa.core/ffprobe))
   (testing "Constants match format."
-    (is (application-format FFMPEG))
-    (is (application-format FFPLAY))
-    (is (application-format FFPROBE)))
+    (is (application-format @#'kawa.core/ffmpeg))
+    (is (application-format @#'kawa.core/ffplay))
+    (is (application-format @#'kawa.core/ffprobe)))
   (testing "Flags are common between applications."
-    (is (= (common-flags FFMPEG FFPLAY) {}))
-    (is (= (common-flags FFMPEG FFPROBE) {}))
-    (is (= (common-flags FFPLAY FFPROBE) {}))))
+    (is (= (common-flags @#'kawa.core/ffmpeg @#'kawa.core/ffplay) {}))
+    (is (= (common-flags @#'kawa.core/ffmpeg @#'kawa.core/ffprobe) {}))
+    (is (= (common-flags @#'kawa.core/ffplay @#'kawa.core/ffprobe) {}))))
 
 
 (deftest formatting
   (testing "format commands based off apps"
-    (is (= (fmt-cmd FFPLAY :disable-audio)
+    (is (= (@#'kawa.core/fmt-cmd @#'kawa.core/ffplay :disable-audio)
            ["ffplay" "-an"]))
-    (is (= (fmt-cmd FFMPEG :this "is" :very 2)
+    (is (= (@#'kawa.core/fmt-cmd @#'kawa.core/ffmpeg :this "is" :very 2)
            ["ffmpeg" "-this" "is" "-very" "2"]))))
 
 (deftest ffmpeg
