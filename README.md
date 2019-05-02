@@ -1,4 +1,5 @@
 # 川 - kawa
+[![Clojars Project](https://img.shields.io/clojars/v/w33t/kawa.svg)](https://clojars.org/w33t/kawa)
 
 A clojure wrapper around ffmpeg command line tools.
 
@@ -16,7 +17,7 @@ about we write a robust system that can:
 This is a wrapper library. Make sure you have ffmpeg installed on your system
 and runnable through your system path.
 
-[![Clojars Project](https://img.shields.io/clojars/v/w33t/kawa.svg)](https://clojars.org/w33t/kawa)
+[![version](https://clojars.org/w33t/kawa/latest-version.svg)](https://clojars.org/w33t/kawa)
 
 ## Usage
 
