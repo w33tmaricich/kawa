@@ -8,7 +8,7 @@ A clojure wrapper around ffmpeg command line tools.
 ffmpeg is an awesome tool. Lets stop just using `sh` to control it. How
 about we write a robust system that can:
 
- - Control the many tools included in ffmpeg's echosystem.
+ - Control the many tools included in ffmpeg's ecosystem.
  - Keep track of what processes we have spun up.
  - Navigate ffmpeg's flag hell with readable sane flags.
 
@@ -87,7 +87,7 @@ kawa.core=> (manager/register :test (ffmpeg! :i "rtsp://admin:robot@172.28.137.1
 ```
 
 The current state has been returned. You can see it registered the process
-as `:test`. If you do not provie an id to register it as, a unique id will be
+as `:test`. If you do not provide an id to register it as, a unique id will be
 generated for you.
 
 To kill the process that has been registered, simply run:
@@ -96,7 +96,7 @@ kawa.core=> (manager/kill :test)
 ;Stopping :test
 ;#future[{:status :ready, :val 0} 0x7549316]
 ```
-`kill` returns a future whos value is the exit value that is returned from the
+`kill` returns a future whose value is the exit value that is returned from the
 shell.
 
 
