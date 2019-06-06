@@ -1,4 +1,5 @@
 # 川 - kawa
+[![Clojars Project](https://img.shields.io/clojars/v/w33t/kawa.svg)](https://clojars.org/w33t/kawa)
 
 A clojure wrapper around ffmpeg command line tools.
 
@@ -7,7 +8,7 @@ A clojure wrapper around ffmpeg command line tools.
 ffmpeg is an awesome tool. Lets stop just using `sh` to control it. How
 about we write a robust system that can:
 
- - Control the many tools included in ffmpeg's echosystem.
+ - Control the many tools included in ffmpeg's ecosystem.
  - Keep track of what processes we have spun up.
  - Navigate ffmpeg's flag hell with readable sane flags.
 
@@ -16,9 +17,7 @@ about we write a robust system that can:
 This is a wrapper library. Make sure you have ffmpeg installed on your system
 and runnable through your system path.
 
-```clojure
-[w33t/kawa "0.1.1"]
-```
+[![version](https://clojars.org/w33t/kawa/latest-version.svg)](https://clojars.org/w33t/kawa)
 
 ## Usage
 
@@ -76,7 +75,7 @@ kawa.core=> (def my-registry (atom {}))
 kawa.core=> (manager/ls my-registry)
 ;{}
 kawa.core=> (manager/ls)
-;{:cmd ["ffmpeg" "-f" "lavfi" "-i" "testsrc" "-t" "10" "-pix_fmt" "yuv460p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x33b2f029 "java.lang.UNIXProcess$ProcessPipeInputStream@33b2f029"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x134ec85c "java.lang.UNIXProcess$ProcessPipeOutputStream@134ec85c"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x375941a4 "java.lang.UNIXProcess$ProcessPipeInputStream@375941a4"], :process #object[java.lang.UNIXProcess 0x3c319941 "java.lang.UNIXProcess@3c319941"]}}
+;{:test {:cmd ["ffmpeg" "-i" "rtsp://admin:robot@172.28.137.102:554/media/video1" "-t" "100" "-pix_fmt" "yuv420p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x53d266d "java.lang.UNIXProcess$ProcessPipeInputStream@53d266d"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x5eba57f5 "java.lang.UNIXProcess$ProcessPipeOutputStream@5eba57f5"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x40de6630 "java.lang.UNIXProcess$ProcessPipeInputStream@40de6630"], :process #object[java.lang.UNIXProcess 0x538f1277 "java.lang.UNIXProcess@538f1277"]}}}
 ```
 
 In this example, we have no processes registered yet. Lets spin up an ffmpeg
@@ -84,12 +83,12 @@ process and register it in one go.
 
 ```clojure
 kawa.core=> (manager/register :test (ffmpeg! :i "rtsp://admin:robot@172.28.137.102:554/media/video1" :duration 100 :pix_fmt "yuv420p" "testsrc.mp4"))
-;{:test {:cmd ["ffmpeg" "-i" "rtsp://admin:robot@172.28.137.102:554/media/video1" "-t" "100" "-pix_fmt" "yuv420p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x53d266d "java.lang.UNIXProcess$ProcessPipeInputStream@53d266d"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x5eba57f5 "java.lang.UNIXProcess$ProcessPipeOutputStream@5eba57f5"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x40de6630 "java.lang.UNIXProcess$ProcessPipeInputStream@40de6630"], :process #object[java.lang.UNIXProcess 0x538f1277 "java.lang.UNIXProcess@538f1277"]}}}
+; :test
 ```
 
-The current state has been returned. You can see it registered the process
-as `:test`. If you do not provie an id to register it as, a unique id will be
-generated for you.
+You can then use `ls` to ensure the process has been successfully registered.
+If you do not provide an id to register it as, a unique id will be
+generated for you. `register` returns the ID of process you just registered.
 
 To kill the process that has been registered, simply run:
 ```clojure
@@ -97,7 +96,7 @@ kawa.core=> (manager/kill :test)
 ;Stopping :test
 ;#future[{:status :ready, :val 0} 0x7549316]
 ```
-`kill` returns a future whos value is the exit value that is returned from the
+`kill` returns a future whose value is the exit value that is returned from the
 shell.
 
 
