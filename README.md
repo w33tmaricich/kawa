@@ -75,7 +75,7 @@ kawa.core=> (def my-registry (atom {}))
 kawa.core=> (manager/ls my-registry)
 ;{}
 kawa.core=> (manager/ls)
-;{:cmd ["ffmpeg" "-f" "lavfi" "-i" "testsrc" "-t" "10" "-pix_fmt" "yuv460p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x33b2f029 "java.lang.UNIXProcess$ProcessPipeInputStream@33b2f029"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x134ec85c "java.lang.UNIXProcess$ProcessPipeOutputStream@134ec85c"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x375941a4 "java.lang.UNIXProcess$ProcessPipeInputStream@375941a4"], :process #object[java.lang.UNIXProcess 0x3c319941 "java.lang.UNIXProcess@3c319941"]}}
+;{:test {:cmd ["ffmpeg" "-i" "rtsp://admin:robot@172.28.137.102:554/media/video1" "-t" "100" "-pix_fmt" "yuv420p" "testsrc.mp4"], :process {:out #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x53d266d "java.lang.UNIXProcess$ProcessPipeInputStream@53d266d"], :in #object[java.lang.UNIXProcess$ProcessPipeOutputStream 0x5eba57f5 "java.lang.UNIXProcess$ProcessPipeOutputStream@5eba57f5"], :err #object[java.lang.UNIXProcess$ProcessPipeInputStream 0x40de6630 "java.lang.UNIXProcess$ProcessPipeInputStream@40de6630"], :process #object[java.lang.UNIXProcess 0x538f1277 "java.lang.UNIXProcess@538f1277"]}}}
 ```
 
 In this example, we have no processes registered yet. Lets spin up an ffmpeg
@@ -88,7 +88,7 @@ kawa.core=> (manager/register :test (ffmpeg! :i "rtsp://admin:robot@172.28.137.1
 
 The current state has been returned. You can see it registered the process
 as `:test`. If you do not provide an id to register it as, a unique id will be
-generated for you.
+generated for you. `register` returns the ID of process you just registered.
 
 To kill the process that has been registered, simply run:
 ```clojure

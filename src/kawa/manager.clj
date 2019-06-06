@@ -33,7 +33,8 @@
    {:pre [(atom? custom-state)
           (keyword? process-id)
           (map? process-info)]}
-   (swap! custom-state assoc process-id process-info)))
+   (swap! custom-state assoc process-id process-info)
+   process-id))
 
 (defn kill
   "Forcibly stops a running process.
